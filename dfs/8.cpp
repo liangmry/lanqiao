@@ -1,44 +1,36 @@
-#include "bits/stdc++.h"
+// P1706 全排列问题
+#include <iostream>
+
 using namespace std;
-
-// 排列
+// 全排列 每个位置都可以放任何数，前提是它还没有被放置
 int n;
-const int N = 12;
-bool st[N]; // true选过  false未选
-int arr[N];
+const int N = 10;
+bool st[N];
+int ans[N]; // 记录选好的数列
 
-void func(int x) // x位置  num该位置的数字
-{
-    if(x > n) // 剪枝
-    {
-        for(int i = 1; i <= n; i++)
-        {
-            cout << "    " << arr[i];
+void dfs(int x) {
+    if(x > n) {
+        for(int i = 1; i <= n; i++) {
+            printf("%5d", ans[i]); // 要求5个场宽
         }
-        cout << endl;
+        printf("\n");
         return ;
     }
-
-    for(int i = 1; i <= n; i++)
-    {
-        if(!st[i])
-        {
+    for(int i = 1; i <= n; i++) {
+        if(!st[i]) {
             st[i] = true;
-            arr[x] = i;
-            func(x+1);
+            ans[x] = i;
+            dfs(x+1);
 
-            //恢复状态
+            // 恢复状态
             st[i] = false;
-            arr[x] = 0;
+            ans[x] = 0; // 也可以不用写这句话
         }
     }
-
 }
 
-int main()
-{
+int main() {
     cin >> n;
-    func(1);
-    
+    dfs(1);
     return 0;
 }
