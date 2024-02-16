@@ -1,3 +1,4 @@
+// P1216 [USACO1.5] [IOI1994]数字三角形 Number Triangles
 #include <iostream>
 #include <algorithm>
 using namespace std;

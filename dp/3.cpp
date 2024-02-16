@@ -1,7 +1,8 @@
+// P1255 数楼梯
 #include <iostream>
 
 using namespace std;
-
+// 递推 + 高精度
 int n;
 const int N = 5005;
 int dp[N][N]; // 高精度
