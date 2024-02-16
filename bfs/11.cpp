@@ -5,6 +5,7 @@
 #define PII pair<int, int>
 using namespace std;
 // 双端队列bfs
+// 满足队列的两端性 单调性 -- push_front() 和 push_back()
 
 int n, m, x1, y1, x2, y2;
 const int dx[] = {1, -1, 0, 0};
