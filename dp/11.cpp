@@ -40,13 +40,25 @@ int main() {
 
     // 背包数组 降维
     // 没能完成！！！
-    for(int i = n; i >= 1; i--) {
-        for(int j = 0; j <= volume[i]; j++) {
-            for(int k = 0; k <= weight[i]; k++) {
-                f[j][k] = max(f[j][k], f[j-volume[i]][k-weight[i]]+value[i]);
+//    for(int i = n; i >= 1; i--) {
+//        for(int j = 0; j <= volume[i]; j++) {
+//            for(int k = 0; k <= weight[i]; k++) {
+//                f[j][k] = max(f[j][k], f[j-volume[i]][k-weight[i]]+value[i]);
+//            }
+//        }
+//    }
+
+    // 现在完成了，以下是失败原因：
+    // 如果 j 和 k 从 0 开始遍历，
+    // 那么在状态转移方程中可能会用到 f[j - volume[i]][k - weight[i]]，--- 出现负数下标！！！
+    // 而这会超出数组 f 的范围
+    for(int i = 1; i <= n; i++) {
+        for(int j = v; j >= volume[i]; j--) {
+            for(int k = m; k >= weight[i]; k--) {
+                f[j][k] = max(f[j][k], f[j - volume[i]][k - weight[i]] + value[i]);
             }
         }
     }
-
+    cout << f[v][m] << endl;
     return 0;
 }
