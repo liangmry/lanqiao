@@ -1,9 +1,10 @@
+// P1162 填涂颜色
 #include <iostream>
 #include <queue>
 #define PII pair<int, int>
 
 using namespace std;
-
+// 闭合圈类的问题
 const int N = 35;
 const int px[] = {0,0,1,-1};
 const int py[] = {1, -1, 0,0};
