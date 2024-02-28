@@ -1,3 +1,4 @@
+// P2895 [USACO08FEB] Meteor Shower S
 #include <iostream>
 #include <queue>
 #include <cstring>
@@ -5,7 +6,7 @@
 #define PII pair<int, int>
 
 using namespace std;
-
+// 有外界干扰的迷宫问题
 const int N = 305;
 const int px[] = {1,-1,0,0};
 const int py[] = {0,0,1,-1};

@@ -1,9 +1,10 @@
+// P1332 血色先锋队
 #include <iostream>
 #include <queue>
 #include <vector>
 #define PII pair<int, int>
 using namespace std;
-
+// 多源bfs
 const int N = 505;
 const int px[] = {1,0,0,-1};
 const int py[] = {0,1,-1,0};
@@ -14,7 +15,6 @@ int dist[N][N]; // 扩散时间
 bool vis[N][N]; // 是否被访问
 queue<PII> q;
 
-// 多源bfs
 void bfs() {
     for(auto &t: src) {
         dist[t.first][t.second] = 0;

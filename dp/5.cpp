@@ -1,7 +1,8 @@
+// P1044 [NOIP2003 普及组] 栈
 #include <iostream>
 
 using namespace std;
-
+// dfs 或者 递推都行
 int n;
 // 关键在于对边界量，做好正确的抽象
 int dfs(int x, int surplus) {    // x剩余待排的数 ， surplus栈中的数目
