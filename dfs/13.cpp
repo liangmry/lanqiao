@@ -20,25 +20,23 @@ void dfs(int x, int start, int sum) {
         dfs(x+1, i, sum+i); // 这里的start是 i，而不是i+1. 因为枚举的数 可能有1 1 5，出现了两个相同的数
     }
 }
-// 记忆化？这个不对
-//int dfs_2(int x, int start, int sum) {
-//    if (mem[x][start][sum] != -1) {
-//        return mem[x][start][sum];
-//    }
-//    if (sum > n) return 0;
-//    if (x > k) {
-//        if (sum == n) return 1;
-//        return 0;
-//    }
-//
-//    int cnt = 0;
-//    for (int i = start; i <= n; i++) {
-//        cnt += dfs_2(x + 1, i, sum + i);
-//    }
-//    mem[x][start][sum] = cnt;
-//    return cnt;
-//}
-
+// 记忆化
+/*
+int dfs(int x, int start_x, int sum) {
+    if(mem[x][start_x][sum] != -1) return mem[x][start_x][sum];
+    if(sum > n) return 0;
+    if(x > k) {
+        if(sum == n) return 1;
+        return 0;
+    }
+    int cnt = 0;
+    for(int i = start_x; i <= n; i++) {
+        cnt +=  dfs(x+1, i, sum+i);
+    }
+    mem[x][start_x][sum] = cnt;
+    return cnt;
+}
+*/
 
 int main() {
     cin >> n >> k;
