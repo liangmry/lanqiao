@@ -142,3 +142,75 @@ int main()
     return 0;
 }
  */
+
+// 上面的方法可行，但是每次bfs都要清空队列，并且vis要初始化
+// 重要的是对初始点做对判断 {x, y} 而非 {t.first, t.second}
+
+/* 比较笨的方法：每个点都判断能否到达边界
+#include <iostream>
+#include <queue>
+#include <cstring>
+#define PII pair<int, int>
+
+using namespace std;
+
+int n;
+const int N = 33;
+int g[N][N];
+queue<PII> q;
+bool vis[N][N];
+const int dx[] = {1,-1,0,0},
+          dy[] = {0,0,1,-1};
+
+void bfs(int x, int y) {
+    while(!q.empty()) q.pop();
+    memset(vis, 0, sizeof vis);
+
+    q.push({x, y});
+    vis[x][y] = true;
+
+    while(!q.empty()) {
+        auto t = q.front();
+        q.pop();
+
+        for(int i = 0; i < 4; i++) {
+            int a = t.first + dx[i], b = t.second + dy[i];
+            if(a < 1 or a > n or b < 1 or b > n) {
+                g[x][y] = 0;
+                continue;
+            }
+            if(g[a][b] == 1) continue;
+            if(vis[a][b]) continue;
+
+            vis[a][b] = true;
+            q.push({a, b});
+        }
+    }
+}
+
+int main() {
+    cin >> n;
+    for(int i = 1; i <= n; i++) {
+        for(int j = 1; j <= n; j++) {
+            cin >> g[i][j];
+            if(g[i][j] == 0) {
+                g[i][j] = 2;
+            }
+        }
+    }
+    for(int i = 1; i <= n; i++) {
+        for(int j = 1; j <= n; j++) {
+            if(g[i][j] == 2) {
+                bfs(i, j);
+            }
+        }
+    }
+    for(int i = 1; i <= n; i++) {
+        for(int j = 1; j <= n; j++) {
+            cout << g[i][j] << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
+ */
