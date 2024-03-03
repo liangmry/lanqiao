@@ -42,6 +42,7 @@ int bfs() {
 
 int main()
 {
+    // 表示还有很长的时间后，才会砸下来 --> 表示安全区域
     memset(meteor, 0x3f, sizeof meteor); // 直接初始化较大的数，再用min，否则容易出错
     int m;
     cin >> m;
