@@ -4,12 +4,11 @@
 #define PII pair<int, int>
 
 using namespace std;
-// 染色问题
-
+// 还是染色问题，从更外层开始搜
 int n, m;
 const int N = 505;
 const int dx[] = {1,-1,0,0},
-        dy[] = {0,0,1,-1};
+          dy[] = {0,0,1,-1};
 int g[N][N];
 bool vis[N][N];
 queue<PII> q;
@@ -41,14 +40,13 @@ int main() {
         for(int j = 1; j <= m; j++) {
             char ch;
             cin >> ch;
-            if(ch == '*') g[i][j] = 1;
-            else g[i][j] = 0;
+            if(ch == '0') g[i][j] = 0; // 为了搜索方便，g用int
+            else g[i][j] = 1;
         }
     }
-
     bfs(0, 0);
     for(int i = 1; i <= n; i++) {
-        for(int j = 1; j <= n; j++) {
+        for(int j = 1; j <= m; j++) { // 这里写错了，怪不得我不知道为什么过不了。写成：“j <= n” 了
             if(!vis[i][j] and g[i][j] == 0) cnt ++;
         }
     }
