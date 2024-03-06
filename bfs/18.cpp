@@ -44,7 +44,7 @@ int main() {
     scanf("%d", &T);
     while(T--) {
         memset(g, 0x3f, sizeof g); // 必须要初始化为大数
-        if(!q.empty()) q.pop();
+        while(!q.empty()) q.pop(); // 这里 粗心 写成if了
         memset(dist, 0, sizeof dist);
         memset(vis, 0, sizeof vis);
 
