@@ -1,27 +1,89 @@
 // P2658 汽车拉力比赛
-#include<iostream>
-#include<algorithm>
-#include<cstring>
+#include <iostream>
+#include <queue>
+#include <cstring>
+#include <algorithm>
 
-#define x first
-#define y second
-
+#define PII pair<int, int>
+// 二分答案 + bfs
 using namespace std;
-typedef pair<int, int> PII;
 
-const int N = 510;
-
+const int N = 505;
+const int dx[] = {1,-1,0,0};
+const int dy[] = {0,0,1,-1};
 int n, m;
-int high[N][N];
-int flag[N][N];
-int cnt_flag = 0;  //统计路标总数
-PII q[N * N];
-int x1 = 0, y1 = 0;
-bool st[N][N];
+int height[N][N]; // 海拔
+int flag[N][N]; // 存放路标的位置
+queue<PII> q;
+bool vis[N][N];
+int x1, y1; // 存放任意一个路标的坐标，在code里事实上存放了最后一个路标的位置
+int cnt_flag; // 有多少个路标
 
-int dx[] = {-1, 0, 1, 0};
-int dy[] = {0, 1, 0, -1};
+bool check(int mid) {
+    // 初始化数组 清空队列
+    memset(vis, 0, sizeof vis);
+    while(!q.empty()) q.pop();
 
+    q.push({x1, y1}); // 放入路标位置
+    vis[x1][y1] = true;
+
+    int cnt = 1; // 现在搜到的路标
+
+    while(!q.empty()) {
+        auto t = q.front();
+        q.pop();
+
+        for(int i = 0; i < 4; i++) {
+            int a = t.first + dx[i], b = t.second + dy[i];
+            if(a < 1 or a > n or b < 1 or b > m) continue;
+            if(vis[a][b]) continue;
+            if(abs(height[a][b] - height[t.first][t.second]) > mid) continue; // 向数值较小方找
+
+            vis[a][b] = true;
+            q.push({a, b});
+            if(flag[a][b] == 1) {
+                cnt ++;
+                // 全部找到，说明此距离可以满足，直接退出
+                if(cnt == cnt_flag) return true;
+            }
+        }
+    }
+    return false;
+}
+
+int main() {
+    scanf("%d %d", &n, &m);
+    for(int i = 1; i <= n; i++) {
+        for(int j = 1; j <= m; j++) {
+            scanf("%d", &height[i][j]);
+        }
+    }
+    for(int i = 1; i <= n; i++) {
+        for(int j = 1; j <= m; j++) {
+            scanf("%d", &flag[i][j]);
+            if(flag[i][j] == 1) {
+                x1 = i;
+                y1 = j;
+                cnt_flag++;
+            }
+        }
+    }
+    // 二分搜索
+    int l = -1, r = 1e9+1;
+    while(l + 1 < r) {
+        int mid = (l + r) / 2;
+        if(check(mid)) {
+            r = mid; // 最大值最小问题
+        } else {
+            l = mid;
+        }
+    }
+    printf("%d\n", r);
+    return 0;
+}
+
+// 保留了另一种 纯靠数组 的bfs写法
+/*
 bool check(int mid) {
     q[0] = {x1, y1};
     st[x1][y1] = true;
@@ -51,52 +113,4 @@ bool check(int mid) {
     }
     return false;
 }
-
-int main() {
-    scanf("%d %d", &n, &m);
-
-    for(int i = 1; i <= n; i ++) {
-        for(int j = 1; j <= m; j ++) {
-            scanf("%d", &high[i][j]);
-        }
-    }
-
-    for(int i = 1; i <= n; i ++) {
-        for(int j = 1; j <= m; j ++) {
-            scanf("%d", &flag[i][j]);
-        }
-    }
-
-    for(int i = 1; i <= n; i ++) {
-        for(int j = 1; j <= m; j ++) {
-            scanf("%d", &flag[i][j]);
-            if(flag[i][j] == 1) {
-                cnt_flag ++;
-            }
-        }
-    }
-
-    for(int i = 1; i <= n; i ++) {
-        for(int j = 1; j <= m; j ++) {
-            if(flag[i][j] == 1) {
-                x1 = i, y1 = j;
-                break;
-            }
-        }
-    }
-
-    int l = -1, r = 1e9 + 10;
-    while(l + 1 < r) {
-        int mid = (l + r) / 2;
-        // printf("%d\n", mid);
-        memset(q, 0, sizeof q);
-        memset(st, false, sizeof st);
-        if(check(mid)) {
-            r = mid;
-        }
-        else l = mid;
-    }
-
-    printf("%d\n", r);
-    return 0;
-}
+ */
