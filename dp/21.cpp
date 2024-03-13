@@ -35,3 +35,22 @@ int main() {
 
     return 0;
 }
+
+// 错误回顾
+/*
+ * map<int, set<int>> term;
+ *
+ * for(int i = n; i >= 1; i--) {
+for(int j = 0; j <= V; j++) {
+if(j < v[i]) {
+f[i][j] = f[i+1][j];
+if(!term[f[i+1][j]].empty())
+for(auto &t: term[f[i+1][j]]) {
+        term[f[i][j]].insert(t);    ***这里的中括号里是f[][],这是个 int数，那他去做搜索 是不行的
+                                    ***起码应该开个 二维的 以此做索引 保存搜索路径
+}
+。。。。
+for(auto &t: term[f[1][V]]) {
+cout << t << ' ';
+}
+ */
