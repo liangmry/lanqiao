@@ -42,3 +42,34 @@ int main() {
     }
     return 0;
 }
+
+// new 2024-3-16
+/*
+ * #include <iostream>
+#define ll long long
+using namespace std;
+
+const int N = 22;
+ll a, b, c;
+ll mem[N][N][N];
+
+ll w(ll x, ll y, ll z) {
+    if(x <= 0 or y <= 0 or z <= 0) return 1;
+    if(x > 20 or y > 20 or z > 20) return w(20, 20, 20);
+
+    if(mem[x][y][z]) return mem[x][y][z]; // ******** 执行顺序要做修改，不然几个很大的x, y, z 传进来会造成数组越界 *********
+    ll res;
+    if(x < y and y < z) res = w(x, y, z-1) + w(x, y-1, z-1) - w(x, y-1, z);
+    else res = w(x-1, y, z) + w(x-1, y-1, z) + w(x-1, y, z-1) - w(x-1, y-1, z-1);
+    mem[x][y][z] = res;
+    return res;
+}
+
+int main() {
+    while(scanf("%lld %lld %lld", &a, &b, &c)) {
+        if(a == -1 and b == -1 and c == -1) break;
+        printf("w(%lld, %lld, %lld) = %lld\n", a, b, c, w(a, b, c));
+    }
+    return 0;
+}
+ */
