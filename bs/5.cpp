@@ -11,6 +11,7 @@ ll res;
 
 // 二分查找
 int bSearch() {
+    // 这里有一点需要注意，l = 0 而不是 -1， 若l = -1，会遇到 除数为0的情况 “arr[i] / mid”
     int l = 0, r = li+1;
     while(l + 1 < r) {
         int mid = (l + r) / 2;
