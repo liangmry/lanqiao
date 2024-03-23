@@ -36,6 +36,7 @@ int main() {
     sort(paper + 1, paper + 1 + n);
     int tmp = bs();
 
+    // 对已经满足大于第一次bs结果的数据继续引用，没有意义，因为不会改变结果。所以只能对比他小去加引用
     for(int i = n; i >= 1; i--) {
         if(m == 0) break;
         if(paper[i] <= tmp) {
