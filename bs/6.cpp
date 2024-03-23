@@ -2,6 +2,7 @@
 #include <iostream>
 #include <algorithm>
 using namespace std;
+// 有一个附加的东西要做处理，可以多学习一下，学会蒙怎么处理
 
 const int N = 1e5 + 5;
 int n, m;
